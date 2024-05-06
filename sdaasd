@@ -1,0 +1,61 @@
+using System; 
+using System.Collections.Generic; 
+ 
+namespace MusicStreamingApp 
+{ 
+    class Program 
+    { 
+        static void Main(string[] args) 
+        { 
+            MusicPlayer player = new MusicPlayer(); 
+             
+            // Добавление нескольких песен в плейлист 
+            player.AddSong(new Song("Song1", "Artist1", 3.5)); 
+            player.AddSong(new Song("Song2", "Artist2", 4.2)); 
+            player.AddSong(new Song("Song3", "Artist3", 5.0)); 
+             
+            // Воспроизведение выбранной песни 
+            player.Play(1); 
+             
+            Console.ReadLine(); 
+        } 
+    } 
+ 
+    class Song 
+    { 
+        public string Title { get; set; } 
+        public string Artist { get; set; } 
+        public double Duration { get; set; } 
+ 
+        public Song(string title, string artist, double duration) 
+        { 
+            Title = title; 
+            Artist = artist; 
+            Duration = duration; 
+        } 
+    } 
+ 
+    class MusicPlayer 
+    { 
+        private List<Song> playlist = new List<Song>(); 
+ 
+        public void AddSong(Song song) 
+        { 
+            playlist.Add(song); 
+        } 
+ 
+        public void Play(int index) 
+        { 
+            if (index >= 0 && index < playlist.Count) 
+            { 
+                Song currentSong = playlist[index]; 
+                Console.WriteLine($"Now playing: {currentSong.Title} by {currentSong.Artist}"); 
+                Console.WriteLine($"Duration: {currentSong.Duration} minutes"); 
+            } 
+            else 
+            { 
+                Console.WriteLine("Invalid song index"); 
+            } 
+        } 
+    } 
+}
